@@ -27,14 +27,14 @@ Open your terminal and run the commands
 
 | path | method | |
 |:--- |:--- | --- |
-|`/api/phone-book`| GET | list all record |
-|`/api/phone-book`| POST | create a new contact record |
+|`/api/phone-book`| GET | list of all phone contacts |
+|`/api/phone-book`| POST | Add new phone number |
 |`/api/phone-book/:mobile`| GET | get the individual record |
-|`/api/phone-book/:id`| PUT | update the whole record |
-|`/api/phone-book/:id`| DELETE | get the individual record |
+|`/api/phone-book/:id`| PUT | update the phone book record |
+|`/api/phone-book/:mobile`| DELETE | delete by mobile number the individual record |
 
 
-## Main Technologies and libraries
+## Used technologies and libraries
 
 - <a href="https://babeljs.io/">Babel</a>
 - <a href="https://nodejs.org/en/">NodeJS</a>

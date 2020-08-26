@@ -103,16 +103,27 @@ class PhoneBookController {
      * @return    {json} mixed
      */
     static async remove(ctx) {
-        const { id } = ctx.params;
-        const phoneBook = await PhoneBook.findOneAndDelete({ _id: id });
-        if (phoneBook) {
-            ctx.status = 200;
-            ctx.body = phoneBook;
-        } else {
-            ctx.status = 400;
-            ctx.body = 'Contact doesn\'t exist in the phone book';
+            const { mobile } = ctx.params;
+            const phoneBook = await PhoneBook.findOneAndDelete({ mobile });
+            if (phoneBook) {
+                ctx.status = 200;
+                ctx.body = "Contact Deleted Successfully";
+            } else {
+                ctx.status = 400;
+                ctx.body = 'Contact doesn\'t exist in the phone book';
+            }
         }
-    }
+        // static async deleteById(ctx) {
+        //     const { id } = ctx.params;
+        //     const phoneBook = await PhoneBook.findOneAndDelete({ _id: id });
+        //     if (phoneBook) {
+        //         ctx.status = 200;
+        //         ctx.body = "Contact Deleted Successfully";
+        //     } else {
+        //         ctx.status = 400;
+        //         ctx.body = 'Contact doesn\'t exist in the phone book';
+        //     }
+        // }
 }
 
 export default PhoneBookController;

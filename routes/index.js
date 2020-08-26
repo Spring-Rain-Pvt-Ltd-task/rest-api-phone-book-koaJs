@@ -14,7 +14,8 @@ export default () => {
     router.post('/api/phone-book/', phoneBookController.create);
     router.get(`/api/phone-book/:mobile`, phoneBookController.findByMobile);
     router.put(`/api/phone-book/:id`, phoneBookController.update);
-    router.delete(`/api/phone-book/:id`, phoneBookController.remove);
+    router.delete(`/api/phone-book/:mobile`, phoneBookController.remove);
+    // router.delete(`/api/phone-book/:id`, phoneBookController.deleteById);
 
     return router.routes();
 }
