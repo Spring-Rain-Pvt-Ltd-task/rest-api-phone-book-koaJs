@@ -22,7 +22,8 @@ class App {
         mongoose.Promise = global.Promise;
         mongoose.connect(config.MONGO_URL, {
                 useNewUrlParser: true,
-                useUnifiedTopology: true
+                useUnifiedTopology: true,
+                useFindAndModify: false
             })
             .then(() => console.log('MongoDB Connected'))
             .catch(err => console.log(err));

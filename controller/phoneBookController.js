@@ -29,20 +29,20 @@ class PhoneBookController {
     static async findByMobile(ctx) {
         const { mobile } = ctx.params;
         try {
-            const contact = await PhoneBook.find({ mobile });
-            if (!contact || contact.length === 0) {
+            const phoneBook = await PhoneBook.find({ mobile });
+            if (!phoneBook || phoneBook.length === 0) {
                 ctx.status = 404
-                throw new Error("phone number does not exist")
+                throw new Error("Phone number does not exist")
             }
             ctx.status = 200;
-            ctx.body = contact;
+            ctx.body = phoneBook;
         } catch (error) {
             ctx.body = error ? error.message : error
         }
     }
 
     /**
-     * Create contact
+     * Create phone contact
      * @param     {object}  ctx.params
      * @return    {json} mixed
      */
@@ -56,7 +56,7 @@ class PhoneBookController {
                 ctx.body = validate.error;
             } else if (exist.length > 0) {
                 ctx.status = 400;
-                ctx.body = 'Mobile number is already exists';
+                ctx.body = 'Mobile number is already exists in your phone book';
             } else {
                 const phoneBook = new PhoneBook({
                     name,
@@ -65,7 +65,6 @@ class PhoneBookController {
                 const user = await phoneBook.save();
                 ctx.status = 201;
                 ctx.body = user;
-
             }
 
         } catch (error) {
@@ -74,37 +73,44 @@ class PhoneBookController {
     }
 
     /**
-     * Update contact
+     * Update phone book contact
      * @param     {object}  ctx.params
      * @return    {json} mixed
      */
     static async update(ctx) {
-        const { mobile } = ctx.params;
-        const { name, email } = ctx.request.body;
-        const contact = await PhoneBook.findOneAndUpdate({ mobile }, { $set: { name, email } });
-        if (contact) {
-            ctx.status = 200;
-            ctx.body = contact;
-        } else {
+        const { id } = ctx.params;
+        const { body, body: { name, mobile } } = ctx.request;
+        const validate = validator(body);
+        if (!validate.isValid) {
             ctx.status = 400;
-            ctx.body = 'Contact doesn\'t exist in the db';
+            ctx.body = validate.error;
+        } else {
+            const phoneBook = await PhoneBook.findOneAndUpdate({ _id: id }, { $set: { name, mobile } });
+            if (phoneBook) {
+                ctx.status = 200;
+                ctx.body = phoneBook;
+            } else {
+                ctx.status = 400;
+                ctx.body = 'Contact doesn\'t exist in the phone book';
+            }
         }
+
     }
 
     /**
-     * Delete contact
-     * @param     {object}  ctx
+     * Delete from phone book contact
+     * @param     {object}  ctx.params
      * @return    {json} mixed
      */
     static async remove(ctx) {
-        const { mobile } = ctx.params;
-        const contact = await PhoneBook.findOneAndDelete({ mobile });
-        if (contact) {
+        const { id } = ctx.params;
+        const phoneBook = await PhoneBook.findOneAndDelete({ _id: id });
+        if (phoneBook) {
             ctx.status = 200;
-            ctx.body = contact;
+            ctx.body = phoneBook;
         } else {
             ctx.status = 400;
-            ctx.body = 'Contact doesn\'t exist in the db';
+            ctx.body = 'Contact doesn\'t exist in the phone book';
         }
     }
 }

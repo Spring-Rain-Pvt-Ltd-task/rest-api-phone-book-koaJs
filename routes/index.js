@@ -13,8 +13,8 @@ export default () => {
     router.get('/api/phone-book/', phoneBookController.findAll);
     router.post('/api/phone-book/', phoneBookController.create);
     router.get(`/api/phone-book/:mobile`, phoneBookController.findByMobile);
-    router.put(`/api/phone-book/:mobile`, phoneBookController.update);
-    router.delete(`/api/phone-book/:mobile`, phoneBookController.remove);
+    router.put(`/api/phone-book/:id`, phoneBookController.update);
+    router.delete(`/api/phone-book/:id`, phoneBookController.remove);
 
     return router.routes();
 }
