@@ -46,3 +46,6 @@ Open your terminal and run the commands
 - <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a>
 - <a href="https://github.com/alexmingoia/koa-router">koa-router</a>
 
+**Author: Nipu Chakraborty**
+
+**email:pro.nipu@gmail.com**
