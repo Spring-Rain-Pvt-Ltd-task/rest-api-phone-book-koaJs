@@ -30,8 +30,8 @@ Open your terminal and run the commands
 |`/api/phone-book`| GET | list all record |
 |`/api/phone-book`| POST | create a new contact record |
 |`/api/phone-book/:mobile`| GET | get the individual record |
-|`/api/phone-book/:mobile`| PUT | update the whole record |
-|`/api/phone-book/:mobile`| DELETE | get the individual record |
+|`/api/phone-book/:id`| PUT | update the whole record |
+|`/api/phone-book/:id`| DELETE | get the individual record |
 
 
 ## Main Technologies and libraries
